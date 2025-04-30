@@ -1,8 +1,11 @@
 import React from 'react'
+import Navbar from '@/component/navbar'
 
 function Page() {
   return (
-    <div className='text-6xl'>page</div>
+    <div className='text-6xl'>page
+    <Navbar />
+    </div>
   )
 }
 
