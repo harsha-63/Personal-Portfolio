@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { FaBars,FaTimes } from "react-icons/fa";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,7 +16,7 @@ const Navbar = () => {
         </Link>
 
         <button onClick={toggleMenu} className="md:hidden focus:outline-none">
-          {isOpen ? "Close" : "Menu"}
+          {isOpen ? <FaTimes size={14}/> : <FaBars size={14}/>}
         </button>
 
         {/* Menu Container */}
@@ -40,7 +41,7 @@ const Navbar = () => {
           </ul>
 
           <a
-            href="/Fathima_Harsha_Resume.pdf"
+            href="/public/Harsha_Resume.pdf"
             download
             className="text-xl bg-white text-black px-4 py-2 rounded m-4 md:m-0"
           >
