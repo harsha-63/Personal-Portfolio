@@ -9,7 +9,7 @@ const Navbar = () => {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
-    <nav className="bg-gray-800 text-white p-4 relative z-50">
+    <nav className="bg-white text-black p-4 relative z-50">
       <div className="container mx-auto flex justify-between items-center">
         <Link href="/" className="text-xl font-semibold">
           Fathima Harsha
