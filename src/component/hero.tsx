@@ -1,40 +1,84 @@
-import React from 'react';
+"use client";
+import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
+import Navbar from './navbar';
+
 
 const Hero =() =>{
+  <Navbar/>
+
+  const roles = ['Full stack', 'Frontend', 'Backend'];
+  const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
+  const [displayText, setDisplayText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentRole = roles[currentRoleIndex];
+    
+    const timeout = setTimeout(() => {
+      if (!isDeleting) {
+        // Typing effect
+        if (displayText.length < currentRole.length) {
+          setDisplayText(currentRole.substring(0, displayText.length + 1));
+        } else {
+          // Wait before starting to delete
+          setTimeout(() => setIsDeleting(true), 1000);
+        }
+      } else {
+        // Deleting effect
+        if (displayText.length > 0) {
+          setDisplayText(currentRole.substring(0, displayText.length - 1));
+        } else {
+          // Move to next role
+          setIsDeleting(false);
+          setCurrentRoleIndex((prevIndex) => (prevIndex + 1) % roles.length);
+        }
+      }
+    }, isDeleting ? 50 : 100); // Faster deleting, slower typing
+
+    return () => clearTimeout(timeout);
+  }, [displayText, isDeleting, currentRoleIndex, roles]);
   return (
+   
     <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-yellow-100 relative overflow-hidden">
+      <Navbar />
       {/* Background decorative elements */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-yellow-400 to-yellow-500 rounded-full transform translate-x-48 -translate-y-48 opacity-20"></div>
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-yellow-300 to-yellow-400 rounded-full transform -translate-x-32 translate-y-32 opacity-15"></div>
       
       {/* Main hero content */}
-      <div className="container mx-auto px-6 lg:px-8 pt-20 lg:pt-32">
+      <div className="container mt-16 mx-auto px-6 lg:px-8 pt-20 lg:pt-32">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           
           {/* Left side - Text content */}
-          <div className="space-y-8 z-10 relative">
+          <div className="space-y-4 z-10 ml-16 relative">
             <div className="space-y-2">
               <p className="text-gray-600 text-lg font-medium">Hello, I&apos;m Fathima Harsha</p>
-              <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                UI & UX
-                <br />
-                <span className="text-yellow-400">Designer</span>
+              <h1 className="text-5xl lg:text-4xl font-bold text-gray-900 leading-tight">
+              <span className="inline-block min-w-[300px] lg:min-w-[400px]">
+              {displayText}
+              <span className="animate-pulse text-yellow-400">|</span>
+            </span>
+            <br />
+                <span className="text-yellow-400 text-6xl">Developer</span>
               </h1>
             </div>
-            
-            <p className="text-gray-600 text-xl font-medium max-w-md">
-              Freelance Web Designer And Developer
+            <p className="text-gray-700 text-lg">
+              I am a passionate developer with expertise in building scalable web applications. I love creating intuitive user experiences and writing clean, efficient code.
             </p>
+
             
-            <div className="pt-4">
-              <button className="bg-yellow-400 hover:bg-yellow-500 text-white font-semibold px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+            <div className="pt-">
+              <Link href="/contact" className="inline-block">
+              <button className="bg-yellow-400 hover:bg-yellow-500 text-white text-xl px-4 py-2 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
                 HIRE ME
               </button>
+              </Link>
             </div>
           </div>
           
           {/* Right side - Image and decorative elements */}
-          <div className="relative flex justify-center lg:justify-end">
+          <div className="relative flex justify-center lg:justify-end mr-36">
             {/* Main orange background shape */}
             <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-80 h-96 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-3xl rounded-tr-[120px] z-0"></div>
             
