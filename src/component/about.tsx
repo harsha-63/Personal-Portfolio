@@ -2,10 +2,13 @@
 
 import React from "react";
 import Image from "next/image";
+import Navbar from "@/component/navbar";
 
 const AboutPage = () => {
+  
   return (
     <main className="min-h-screen bg-white text-gray-800 py-16 px-6 md:px-20">
+      <Navbar />
       <section className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold mb-6 border-l-4 border-yellow-400 pl-4">
           About Me
